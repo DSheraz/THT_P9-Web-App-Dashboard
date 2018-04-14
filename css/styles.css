@@ -1,0 +1,659 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: SteelBlue;
+}
+
+/* main header */
+
+.main-header {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: tomato;
+  z-index: 20;
+}
+
+.app-title {
+  flex-grow: 2;
+  margin-left: 20px;
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+/* -----notification----- */
+.notification {
+  position: relative;
+}
+
+.notification-svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  padding-right: 5px;
+  border-right: 1px solid #D2E6D2;
+}
+
+/* ==notification marker== */
+.notification-svg::after {
+    content: "";
+    position: absolute;
+    top: -2.5px;
+    right: 15px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: lightblue;
+}
+
+/* ==dropdown content== */
+.notification-content {
+    display: none;
+    position: absolute;
+    background-color: #FF8F5A;
+    min-width: 182px;
+    top: 37px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 25;
+}
+
+.notification-content a {
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+
+.notification-content a:hover {
+  cursor: pointer;
+  background-color: #FFA26C;
+}
+
+.notification-content a:last-child {
+  border-bottom: none;
+}
+
+/* ==show dropdown content== */
+.show {
+  display: flex;
+  flex-direction: column;
+}
+
+/* -----profile----- */
+.profile {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+/* mainnav */
+
+.main-nav {
+  position: fixed;
+  display: flex;
+  top: 50px;
+  justify-content: space-around;
+  height: 45px;
+  width: 100%;
+  background-color: lightblue;
+  z-index: 19;
+}
+.nav-dashboard {
+  border-bottom: 3px solid tomato;
+}
+.dashboard-svg,
+.members-svg,
+.visits-svg,
+.settings-svg {
+  width: 25px;
+  height: 25px;
+  margin: 10px;
+}
+
+/*main body*/
+main {
+  margin-top: 95px;
+  background-color: #fff;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.widget-title {
+  text-align: center;
+  margin: 15px;
+}
+/*dashboard*/
+.dashboard {
+  width: 100%;
+}
+
+/* -----searc-box----- */
+.search-box {
+  z-index: 10;
+  right: 0;
+  background-color: #747076;
+  height: 60px;
+}
+
+.search-box input {
+  margin: 0 10%;
+  border-radius: 10px;
+  width: 80%;
+  margin-top: 20px;
+}
+
+/* -----alert----- */
+.alert {
+  background-color: #D90404;
+  padding: 10px;
+  margin: 10px;
+  color: #fff;
+}
+
+.alertTag {
+  font-weight: 700;
+  margin-left: -5px;
+}
+
+.close:after{
+  float:right;
+  margin-right: -5px;
+  content: "\00d7"; /* This will render the 'X' */
+}
+
+/* -----charts----- */
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.general {
+  position: relative;
+  width: 100%;
+  border: 1px solid #D2E6D2;
+}
+
+/* -----chart-button to change graph----- */
+.chart-button {
+  width: 60%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.chart-button button {
+  border: none;
+  background-color: #F2EC94;
+  padding: 5px 15px;
+}
+
+.chart-button button:focus {
+  background-color: #F2EC6F;
+  outline: #F2D194;
+}
+
+.general-chart {
+  width: 100% !important;
+  margin: 50px auto;
+  padding: 10px;
+  margin-bottom: 0;
+}
+
+.general h2 {
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.daily-traffic,
+.mobile-users {
+  width: 100%;
+  border: 1px solid #D2E6D2;
+  padding: 10px;
+}
+
+.daily-traffic-chart {
+  width: 90% !important;
+  margin: 40px auto;
+}
+
+.mobile-users-chart {
+  margin: 40px auto;
+  width: 70% !important;
+  height: 70% !important;
+  margin-bottom: 0;
+}
+
+.chartjsLegend li span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+    border-radius: 25px;
+}
+
+/* social status */
+
+.social-stats {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-around;
+  width: 100%;
+  border: 1px solid #D2E6D2;
+}
+
+.soc-med {
+  display: flex;
+  border: 2px solid #3FBF90;
+  border-radius: 10px;
+  background-color: #B0ECC1;
+  padding: 10px 30px;
+  margin: 10px auto;
+  width: 100%;
+  align-items: center;
+}
+
+.soc-med-svg {
+  background-color: purple;
+  border-radius: 50%;
+}
+
+.twitter {
+  background-color: #55ACEE;
+}
+
+.facebook {
+  background-color: #3B5998;
+}
+
+.google-plus {
+  background-color: #D34836;
+}
+
+.soc-med-svg svg {
+  width: 70px;
+  height: 70px;
+  padding: 20px;
+}
+
+.soc-med .stats {
+  padding: 10px;
+  display: flex;
+  flex-grow: 1;
+  margin-right: -20px;
+}
+
+.stats h3 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.stats span {
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+/* members and activities */
+
+.members,
+.activities {
+  width: 100%;
+  border: 1px solid #D2E6D2;
+  padding: 10px;
+}
+
+.member:first-child,
+.activity:first-child {
+  border: 1px solid black;
+}
+
+.member:last-child,
+.activity:last-child {
+  border: none;
+}
+
+.member,
+.activity {
+  display: flex;
+  margin: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #D2E6D2;
+}
+
+.member-picture {
+  align-self: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.member-info {
+  align-self: center;
+  padding: 10px;
+  flex-grow: 2;
+}
+
+.member-date {
+  align-self: center;
+}
+
+.member-activity span {
+  font-size: 0.67em;
+}
+
+.member-name {
+  margin: 0;
+  margin-right: 5px;
+  display: inline;
+}
+
+.members h6,
+.activities h6 {
+  margin: 1px 0 ;
+}
+
+.activities .arrow {
+  font-size: 2em;
+  color: green;
+  cursor: pointer;
+  align-self: center;
+}
+
+/* -----wrap widget----- */
+.widget-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+/* message */
+
+.message {
+  width: 100%;
+  border: 1px solid #D2E6D2;
+  position: relative;
+  padding: 10px;
+}
+
+.message .search-user,
+.message textarea {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.message input {
+  margin-bottom: 0;
+  width: 100%;
+  background-color: #FFEDBB;
+}
+
+.message textarea {
+  height: 110px;
+  background-color: #FFEDBB;
+}
+
+.message-button {
+  display: flex;
+  margin: 18px auto;
+  width: 90%;
+}
+
+.message-button button {
+  flex-grow: 1;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  background-color: #C3BDC8;
+}
+
+/* ==show message after button is pressed== */
+.done {
+  background-color: #920000;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin-left: -10px;
+}
+
+/* ==show list of member that matched with input== */
+.search-member-container {
+  z-index: 20;
+  position: absolute;
+  background-color: lightgreen;
+  width: 20%;
+  transition: all .5s;
+}
+
+.search-member:hover {
+  cursor: pointer;
+  background-color: LightCoral;
+}
+
+/* settings */
+
+.settings {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 1px solid #D2E6D2;
+}
+
+.settings .set {
+  display: flex;
+  flex-grow: 2;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.settings h5 {
+  flex-grow: 2;
+}
+
+/* ==on/off widget */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 30px;
+  margin: auto;
+}
+
+/* hide default HTML checkbox */
+.switch input {
+  display:none;
+}
+
+/* slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #F26E5E;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #F26E5E;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(60px);
+  -ms-transform: translateX(60px);
+  transform: translateX(60px);
+}
+
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* ==timezone select== */
+.timezone {
+  margin: 20px auto;
+  width: 80%;
+  flex-grow: 2;
+}
+
+.settings-button {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.settings-button button {
+  flex-grow: 1;
+  margin: 10px;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  background-color: #C3BDC8;
+}
+
+/* media query for 768px */
+
+@media (min-width: 768px) {
+  .notification-content {
+        top: 36px;
+  }
+  .main-nav {
+    flex-direction: column;
+    height: 100vh;
+    width: 80px;
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+  .dashboard-svg,
+  .members-svg,
+  .visits-svg,
+  .settings-svg {
+    width: 40px;
+    height: 40px;
+    margin: 20px;
+  }
+  .nav-dashboard {
+    border: none;
+    border-left: 3px solid tomato;
+  }
+  main {
+    margin-left: 80px;
+    margin-top: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .widget-title {
+    text-align: left;
+  }
+  .search-box {
+    position: absolute;
+    width: 70%;
+  }
+  .search-box input {
+    padding: 5px;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    width: 60%;
+    margin: 15px;
+  }
+  .general h2 {
+    text-align: left;
+  }
+  .chart-button {
+    width: 50%;
+    float: right;
+  }
+  .charts {
+    flex-direction: row;
+  }
+  .daily-traffic,
+  .mobile-users,
+  .members,
+  .activities,
+  .message,
+  .settings {
+    width: 50%;
+  }
+  .social-stats .widget-wrap {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .soc-med {
+    padding: 10px 20px;
+    margin: 10px;
+  }
+  .soc-med .stats {
+    flex-direction: column;
+  }
+}
+
+/* media query for 768px */
+
+@media (min-width: 1024px) {
+  .profile {
+    margin: 0 30px;
+  }
+  main {
+    margin-top: 70px;
+  }
+  .main-header {
+    height: 70px;
+  }
+  .main-nav {
+    top: 70px;
+  }
+  .dashboard-svg,
+  .members-svg,
+  .visits-svg,
+  .settings-svg {
+    width: 50px;
+    height: 50px;
+    margin: 20px 15px;
+  }
+  .chart-button {
+    width: 40%;
+  }
+  .general-chart {
+    margin-bottom: 10px;
+  }
+  .soc-med {
+    padding: 10px 40px;
+  }
+}
