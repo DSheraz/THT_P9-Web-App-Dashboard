@@ -5,7 +5,7 @@
 //load localStorage
 load();
 
-//=============variables
+//variables
 const close = document.querySelector(".close");
 const alert = document.querySelector(".alert");
 const noti = document.querySelector(".notification-svg");
@@ -14,9 +14,58 @@ const memberName = ["Alex Green","Amanda Doe","Joe Hayes","Dave Smith"];
 const searchUser = document.querySelector(".search-user");
 const input = document.querySelector("#searchName");
 const timezone = document.querySelector(".timezone");
-const settingsButton = document.querySelector(".settings-button");
-const sendMessage = document.querySelector(".message-button");
+const buttonJS = document.querySelectorAll(".button-js");
 const messageArea = document.querySelector(".message-user");
+const settings = document.querySelector(".settings");
+const message = document.querySelector(".message");
+
+//functions
+
+//=============create list of members for search-user
+function membersSearchContainer() {
+  const memberContainer = document.createElement("div");
+  memberContainer.className = "search-member-container";
+  for(let i=0; i<memberName.length; i+=1) {
+    const member = document.createElement("div");
+    member.className = "search-member";
+    member.textContent = memberName[i];
+    memberContainer.appendChild(member);
+    searchUser.appendChild(memberContainer);
+    memberContainer.style.display = "none";
+    member.style.display = "none";
+  }
+}
+
+//=============function to save settings to localStorage
+function save() {
+  const public = document.querySelector("#public");
+  const emailNoti = document.querySelector("#emailNoti");
+  localStorage.setItem('public',public.checked);
+  localStorage.setItem('emailNoti',emailNoti.checked);
+  localStorage.setItem('timezone',timezone.selectedIndex);
+}
+
+//=============function to get saved settings from localStorage
+function load() {
+  const public = JSON.parse(localStorage.getItem('public'));
+  const emailNoti = JSON.parse(localStorage.getItem('emailNoti'));
+  const timezone = localStorage.getItem('timezone');
+  document.querySelector("#public").checked = public;
+  document.querySelector("#emailNoti").checked = emailNoti;
+  document.querySelector(".timezone").selectedIndex = timezone;
+}
+
+//=============function to insert message after button is clicked
+function pop(widget) {
+  const messagePop = document.createElement('div');
+  messagePop.className = "done";
+  widget.appendChild(messagePop);
+  setTimeout(function(){
+     widget.removeChild(messagePop);
+   }, 3000);
+}
+
+//eventlisteners
 
 //=============close alert
 close.addEventListener('click', function () {
@@ -28,21 +77,9 @@ noti.addEventListener('click', function () {
     notiContent.classList.toggle("show");
 });
 
-//=============create list of members for search-user
-const memberContainer = document.createElement("div");
-memberContainer.className = "search-member-container";
-for(let i=0; i<memberName.length; i+=1) {
-  const member = document.createElement("div");
-  member.className = "search-member";
-  member.textContent = memberName[i];
-  memberContainer.appendChild(member);
-  searchUser.appendChild(memberContainer);
-  memberContainer.style.display = "none";
-  member.style.display = "none";
-}
-
 //=============when searchUser receives input, it will display matched members
 searchUser.addEventListener('input', function() {
+  membersSearchContainer();
   const member = document.querySelectorAll(".search-member");
   const memberContainer = document.querySelector(".search-member-container");
   for(let i=0; i<member.length; i+=1){
@@ -65,67 +102,36 @@ searchUser.addEventListener('input', function() {
   }
 });
 
+//=============add eventlistener to settings and message buttons
 
-//=============function to save settings to localStorage
-function save() {
-  const public = document.querySelector("#public");
-  const emailNoti = document.querySelector("#emailNoti");
-  localStorage.setItem('public',public.checked);
-  localStorage.setItem('emailNoti',emailNoti.checked);
-  localStorage.setItem('timezone',timezone.selectedIndex);
-}
-
-//=============function to get saved settings from localStorage
-function load() {
-  const public = JSON.parse(localStorage.getItem('public'));
-  const emailNoti = JSON.parse(localStorage.getItem('emailNoti'));
-  const timezone = localStorage.getItem('timezone');
-  document.querySelector("#public").checked = public;
-  document.querySelector("#emailNoti").checked = emailNoti;
-  document.querySelector(".timezone").selectedIndex = timezone;
-}
-
-//=============add eventlistener to settings button to save or cancel settings
- settingsButton.addEventListener('click',function(e) {
-   const set = document.createElement('div');
-   set.className = "done";
-   const settings = document.querySelector(".settings");
-   settings.appendChild(set);
-   setTimeout(function(){
-     settings.removeChild(set);
-   }, 3000);
-   //target save button and call function save()
-   if(e.target.textContent == "Save"){
-     console.log('saved');
-     save();
-     set.textContent = "*settings saved";
-     //target cancel button and call function load()
-  } else if(e.target.textContent == "Cancel"){
-    console.log('canceled');
-    load();
-    set.textContent = "*settings canceled";
-  }
- });
-
-//=============add eventlistener to send button and append message
- sendMessage.addEventListener('click',function (e) {
+for(let i=0; i<buttonJS.length; i+=1) {
+ buttonJS[i].addEventListener('click',function (e) {
+   //send message
    if(e.target.textContent == "Send") {
-     const sent = document.createElement('div');
-     sent.className = "done";
-     const message = document.querySelector(".message");
-     message.appendChild(sent);
-     setTimeout(function(){
-        message.removeChild(sent);
-      }, 3000);
+     pop(message);
+     const messagePop = document.querySelector(".done");
      //if memberName and message both exist
      if (memberName.indexOf(input.value) !=-1 && messageArea.value != "") {
-       sent.textContent = "*message sent";
+       messagePop.textContent = "*message sent";
     //if no user input or user does not exist
     } else if (memberName.indexOf(input.value) ==-1) {
-      sent.textContent = "*user does not exist";
+      messagePop.textContent = "*user does not exist";
     //if no message input
     } else if (messageArea.value == "") {
-      sent.textContent = "*please enter your message before hitting the 'send' button";
+      messagePop.textContent = "*please enter your message before hitting the 'send' button";
     }
-   }
+  } else if(e.target.textContent == "Save") {    //save settings
+     console.log('saved');
+     pop(settings);
+     const messagePop = document.querySelector(".done");
+     save();
+     messagePop.textContent = "*settings saved";
+  } else if(e.target.textContent == "Cancel"){     //cancel settings
+    console.log('canceled');
+    pop(settings);
+    const messagePop = document.querySelector(".done");
+    load();
+    messagePop.textContent = "*settings canceled";
+  }
  });
+}
